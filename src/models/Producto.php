@@ -1,5 +1,5 @@
 <?php
-
+namespace models;
 
 class Producto {
     public $id = null;
@@ -17,7 +17,7 @@ class Producto {
     public $isDeleted = false;
 
     public function __construct(
-        ?int $id = null,
+        ?string $id = null,
         ?string $uuid= null,
         ?string $descripcion = null,
         ?string $imagen = null,
@@ -27,7 +27,7 @@ class Producto {
         int $stock = 0,
         ?string $createdAt = null,
         ?string $updatedAt = null,
-        ?int $categoriaId = null,
+        ?string $categoriaId = null,
         ?string $categoriaNombre = null,
         bool $isDeleted = false
     ) {
