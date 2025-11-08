@@ -1,4 +1,4 @@
-SELECT 'CREATE DATABASE tienda'
+SELECT 'CREATE DATABASE tienda_php'
 WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'tienda');
 
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS "usuarios";
 DROP SEQUENCE IF EXISTS usuarios_id_seq;
 DROP TABLE IF EXISTS "categorias";
 
--- Cuidado con las secuencias, si se borran se pierde el autoincrement
+
 CREATE SEQUENCE productos_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1;
 CREATE TABLE "public"."productos"
 (
