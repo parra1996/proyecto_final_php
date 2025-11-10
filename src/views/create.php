@@ -34,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'categoria_id' => $categoria_id
         ]);
         $mensaje = 'Producto creado correctamente.';
+         header("Location: ../../index.php");
     }
 }
 ?>

@@ -59,41 +59,48 @@ if ($termino !== '') {
        
        <button onclick="location.href='/proyecto_final/src/views/create.php'">Crear</button>
 
-        <table border="1" cellpadding="5" cellspacing="0">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Descripción</th>
-                    <th>Marca</th>
-                    <th>Modelo</th>
-                    <th>Imagen</th>
-                    <th>Precio</th>
-                    <th>Stock</th>
-                    <th>Categoría</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($productos as $p): ?>
-                <tr>
-                    <td><?= htmlspecialchars($p->getId()) ?></td>
-                    <td><?= htmlspecialchars($p->getDescripcion()) ?></td>
-                    <td><?= htmlspecialchars($p->getMarca()) ?></td>
-                    <td><?= htmlspecialchars($p->getModelo()) ?></td>
-                    <td><?= htmlspecialchars($p-getImagen()) ?></td>
-                    <td><?= number_format($p->getPrecio(), 2) ?></td>
-                    <td><?= $p->getStock() ?></td>
-                    <td><?= htmlspecialchars($p->getCategoriaNombre()) ?></td>
-                    <td class="acciones">
-                        <button onclick="location.href='detalle.php?id=<?= $p->getId() ?>'">Detalles</button>
-                        <button onclick="location.href='editar.php?id=<?= $p->getId() ?>'">Editar</button>
-                        <button onclick="location.href='imagen.php?id=<?= $p->getId() ?>'">Imagen</button>
-                        <button onclick="confirmarEliminacion(<?= $p->getId() ?>)">Eliminar</button>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+        <table class="table table-striped table-hover table-bordered align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Descripción</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Imagen</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Categoría</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($productos as $p): ?>
+        <tr>
+            <td><?= htmlspecialchars($p->getId()) ?></td>
+            <td><?= htmlspecialchars($p->getDescripcion()) ?></td>
+            <td><?= htmlspecialchars($p->getMarca()) ?></td>
+            <td><?= htmlspecialchars($p->getModelo()) ?></td>
+            <td>
+                <img src="<?= htmlspecialchars($p->imagen ?: '/proyecto_final/src/default.png') ?>" 
+                     style="width:100px; height:auto;" 
+                     alt="<?= htmlspecialchars($p->getDescripcion()) ?>">
+            </td>
+            <td><?= number_format($p->getPrecio(), 2) ?> €</td>
+            <td><?= $p->getStock() ?></td>
+            <td><?= htmlspecialchars($p->getCategoriaNombre()) ?></td>
+            <td>
+                <div class="btn-group" role="group">
+                    <button onclick="location.href='detalle.php?id=<?= $p->getId() ?>'" class="btn btn-info btn-sm">Detalles</button>
+                    <button onclick="location.href='src/views/Update.php?id=<?= $p->getId() ?>'" class="btn btn-warning btn-sm">Editar</button>
+                    <button onclick="location.href='imagen.php?id=<?= $p->getId() ?>'" class="btn btn-secondary btn-sm">Imagen</button>
+                    <button onclick="confirmarEliminacion(<?= $p->getId() ?>)" class="btn btn-danger btn-sm">Eliminar</button>
+                </div>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
     </div>
 
     <?php require_once __DIR__ . '/footer.php'; // Solo una vez ?>
@@ -101,7 +108,7 @@ if ($termino !== '') {
     <script>
         function confirmarEliminacion(id) {
             if (confirm("¿Seguro que deseas eliminar este producto?")) {
-                location.href = 'eliminar.php?id=' + id;
+                location.href = 'src/views/delete.php?id=' + id;
             }
         }
     </script>
