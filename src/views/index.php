@@ -15,7 +15,6 @@ if ($termino !== '') {
 } else {
     $productos = $productoService->findAllWithCategoryName();
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -32,33 +31,26 @@ if ($termino !== '') {
     <?php require_once __DIR__ . '/header.php'; ?>
 
     <div class="container">
-        <h2>Bienvenido</h2>
-        <p>Esta es la página principal de tu proyecto.</p>
-
          <div class="acciones">
             <h2>Listado de Productos</h2>
         </div>
 
-        <div class="buscador-container">
-            <form method="GET" action="" class="form-busqueda">
-            <div class="input-group">
-                <input 
-                    type="text" 
-                    name="filter" 
-                    placeholder="Buscar por nombre o marca..." 
-                    value="<?= htmlspecialchars($_GET['filter'] ?? '') ?>" 
-                    class="input-busqueda"
-                    autofocus
-                >
-                <button type="submit" class="btn-buscar">
-                    Buscar
-                </button>
-            </div>
+        <div class="d-flex justify-content-between mb-3">
+            <form method="GET" action="" class="d-flex">
+            <input 
+            type="text" 
+            name="filter" 
+            placeholder="Buscar por nombre o marca..." 
+            value="<?= htmlspecialchars($_GET['filter'] ?? '') ?>" 
+            class="form-control me-2"
+            autofocus
+            >
+            <button type="submit" class="btn btn-primary">Buscar</button>
             </form>
-        <div>
-       
-       <button onclick="location.href='/proyecto_final/src/views/create.php'">Crear</button>
-
+            <button onclick="location.href='/proyecto_final/src/views/create.php'" class="btn btn-success">
+                Crear
+            </button>
+        </div>
         <table class="table table-striped table-hover table-bordered align-middle">
     <thead class="table-dark">
         <tr>
@@ -103,7 +95,7 @@ if ($termino !== '') {
 
     </div>
 
-    <?php require_once __DIR__ . '/footer.php'; // Solo una vez ?>
+    <?php require_once __DIR__ . '/footer.php';  ?>
 
     <script>
         function confirmarEliminacion(id) {
