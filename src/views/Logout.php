@@ -1,8 +1,16 @@
-<?php 
+<?php
+namespace services;
 
-?>
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-<html>
-esto es logout    
+require_once __DIR__ . '/../services/SessionService.php';
+use services\SessionService;
 
-</html>
+$session = SessionService::getInstance();
+
+$session->logout();
+
+header('Location: ../../index.php');
+exit;

@@ -2,7 +2,7 @@
 require_once __DIR__ . '/Header.php'; 
 require_once __DIR__ . '/../config/config.php';
 require_once __DIR__ . '/../services/ProductoService.php';
-
+print_r($_SESSION);
 use services\ProductoService;
 
 $productoService = new ProductoService($pdo);
@@ -73,7 +73,7 @@ if ($termino !== '') {
             <td><?= htmlspecialchars($p->getMarca()) ?></td>
             <td><?= htmlspecialchars($p->getModelo()) ?></td>
             <td>
-                <img src="<?= htmlspecialchars($p->imagen ?: '/proyecto_final/src/default.png') ?>" 
+                <img src="<?= htmlspecialchars($p->getImagen() ?: '/proyecto_final/src/default.png') ?>" 
                      style="width:100px; height:auto;" 
                      alt="<?= htmlspecialchars($p->getDescripcion()) ?>">
             </td>

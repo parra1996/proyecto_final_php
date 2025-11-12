@@ -2,19 +2,19 @@
 namespace models;
 
 class Producto {
-    public $id = null;
-    public $uuid = null;
-    public $descripcion = null;
-    public $imagen = null;
-    public $marca = null;
-    public $modelo = null;
-    public $precio = 0.0;
-    public $stock = 0;
-    public $createdAt = null;
-    public $updatedAt = null;
-    public $categoriaId = null;
-    public $categoriaNombre = null;
-    public $isDeleted = false;
+    private $id ;
+    private $uuid;
+    private $descripcion;
+    private $imagen;
+    private $marca;
+    private $modelo;
+    private $precio = 0.0;
+    private $stock = 0;
+    private $createdAt;
+    private $updatedAt;
+    private $categoriaId;
+    private $categoriaNombre;
+    private $isDeleted;
 
     public function __construct(
         ?string $id = null,
