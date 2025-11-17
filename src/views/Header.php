@@ -30,7 +30,12 @@ $user = $session->getUser();
                     <li class="nav-item"><a class="nav-link" href="/proyecto_final/src/views/Login.php">Login</a></li>
                 <?php else: ?>
                     <li class="nav-item ms-auto">
-                        <span class="nav-link fw-bold"> <?= htmlspecialchars($user['username'] ?? 'Invitado') ?></span>
+                <span class="nav-link fw-bold">
+                    <?= htmlspecialchars($user['username']) ?>
+                    <?php if (in_array('ADMIN', $_SESSION['user']['roles'])): ?>
+                        - Admin
+                    <?php endif; ?>
+                </span>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-danger" href="/proyecto_final/src/views/Logout.php">Cerrar sesión</a>
