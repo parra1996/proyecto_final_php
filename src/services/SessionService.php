@@ -6,7 +6,6 @@ class SessionService
     private static ?SessionService $instance = null;
     private int $expireAfterSeconds = 3600; 
 
-  
     private function __construct()
     {
         if(session_status() === PHP_SESSION_NONE) {
@@ -21,7 +20,6 @@ class SessionService
             $_SESSION['user'] = null;
         }
     }
-
 
     public static function getInstance(): SessionService
     {
@@ -53,10 +51,12 @@ class SessionService
         return $_SESSION['user'] ?? null;
     }
   
-    // public function isAdmin(): bool
-    // {
-    //     return $this->isLoggedIn() && ($_SESSION['user']['rol'] ?? '') === 'admin';
-    // }
+    public function isAdmin(): bool
+    {
+        return $this->isLoggedIn() &&
+           isset($_SESSION['user']['roles']) &&
+           in_array('ADMIN', $_SESSION['user']['roles']);
+    }
 
     private function checkSessionExpired(): void
     {
@@ -70,20 +70,16 @@ class SessionService
         $_SESSION['last_activity'] = $now; 
     }
 
-    // private function destroySession(): void
-    // {
-    //     $_SESSION = [];
-    //     if (ini_get("session.use_cookies")) {
-    //         $params = session_get_cookie_params();
-    //         setcookie(session_name(), '', time() - 42000,
-    //             $params["path"], $params["domain"],
-    //             $params["secure"], $params["httponly"]
-    //         );
-    //     }
-    //     session_destroy();
-
-    //     // setcookie('user_id', '', time() - 3600, '/', '', false, true);
-    //     // setcookie('username', '', time() - 3600, '/', '', false, true);
-    //     // setcookie('rol', '', time() - 3600, '/', '', false, true);
-    // }
+    private function destroySession(): void
+    {
+        $_SESSION = [];
+        if (ini_get("session.use_cookies")) {
+            $params = session_get_cookie_params();
+            setcookie(session_name(), '', time() - 42000,
+                $params["path"], $params["domain"],
+                $params["secure"], $params["httponly"]
+            );
+        }
+        session_destroy();
+    }
 }

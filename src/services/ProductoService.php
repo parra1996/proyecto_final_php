@@ -143,49 +143,51 @@ class ProductoService
         $uuid = Uuid::uuid4()->toString();
 
         $stmt = $this->pdo->prepare("
-            INSERT INTO productos (uuid, descripcion, imagen, marca, modelo, precio, stock)
-            VALUES (:uuid, :descripcion, :imagen, :marca, :modelo, :precio, :stock)
+            INSERT INTO productos (uuid, descripcion, imagen, marca, modelo, precio, stock,categoria_id)
+            VALUES (:uuid, :descripcion, :imagen, :marca, :modelo, :precio, :stock, :categoria_id)
         ");
 
         return $stmt->execute([
             'uuid' => $uuid,
             'descripcion' => $data['descripcion'],
-            'imagen' => $data['imagen'] ?? 'https://via.placeholder.com',
+            'imagen' => $data['imagen'],
             'marca' => $data['marca'],
             'modelo' => $data['modelo'],
             'precio' => $data['precio'],
             'stock' => $data['stock'],
-            // 'categoria_id' => $data['categoria_id']
+            'categoria_id' => $data['categoria_id']
         ]);
     }
 
 
     public function update(Producto $producto)
-        {
-            $stmt = $this->pdo->prepare("
-                UPDATE productos 
-                SET 
-                    descripcion = :descripcion,
-                    marca = :marca,
-                    modelo = :modelo,
-                    precio = :precio,
-                    imagen = :imagen,
-                    stock = :stock,
-                    updated_at = :updated_at
-                WHERE id = :id
-            ");
+    {   
+        $stmt = $this->pdo->prepare("
+            UPDATE productos 
+            SET 
+                descripcion = :descripcion,
+                marca = :marca,
+                modelo = :modelo,
+                precio = :precio,
+                imagen = :imagen,
+                stock = :stock,
+                categoria_id = :categoria_id,
+                updated_at = :updated_at
+            WHERE id = :id
+        ");
 
-            $stmt->execute([
-                ':descripcion' => $producto->getDescripcion(),
-                ':marca' => $producto->getMarca(),
-                ':modelo' => $producto->getModelo(),
-                ':precio' => $producto->getPrecio(),
-                ':imagen' => $producto->getImagen(),
-                ':stock' => $producto->getStock(),
-                ':updated_at' => $producto->getUpdatedAt(),
-                ':id' => $producto->getId()
-            ]);
-        }
+        $stmt->execute([
+            ':descripcion' => $producto->getDescripcion(),
+            ':marca' => $producto->getMarca(),
+            ':modelo' => $producto->getModelo(),
+            ':precio' => $producto->getPrecio(),
+            ':imagen' => $producto->getImagen(),
+            ':categoria_id' => $producto->getCategoriaId(),
+            ':stock' => $producto->getStock(),
+            ':updated_at' => $producto->getUpdatedAt(),
+            ':id' => $producto->getId()
+        ]);
+    }
 
       public function deleteById(string $id)
         {

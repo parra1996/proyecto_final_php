@@ -14,21 +14,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username'] ?? '');
     $password = trim($_POST['password'] ?? '');
 
-    // Validación de campos vacíos
     if (empty($username) || empty($password)) {
         $error = 'Por favor, completa todos los campos.';
     } else {
-        // Intentar autenticar
         $user = $userService->authenticate($username, $password);
 
         if ($user) {
             $_SESSION['user'] = $user;
-
-            // if ($user['rol'] === 'admin') {
-            //     $_SESSION['is_admin'] = true;
-            // }
-
-            // Redirigir al índice
             header('Location: index.php');
             exit;
         } else {
@@ -44,7 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar sesión - Gestión de Productos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             background: #f8f9fa;
@@ -68,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php include __DIR__ . '/Header.php'; ?>
 
     <div class="login-container">
-        <!-- <img src="../assets/logo.png" alt="Logo del proyecto">
+        <!-- <img src="../assets/logo.png" alt="logo">
         <h4 class="text-center mb-4">Acceso al sistema</h4> -->
 
         <?php if (!empty($error)): ?>

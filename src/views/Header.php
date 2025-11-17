@@ -28,10 +28,10 @@ $user = $session->getUser();
                 <li class="nav-item"><a class="nav-link" href="/proyecto_final/">Inicio</a></li>
                 <?php if (!$session->isLoggedIn()): ?>
                     <li class="nav-item"><a class="nav-link" href="/proyecto_final/src/views/Login.php">Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/proyecto_final/src/views/Register.php">Register</a></li>
+                    <!-- <li class="nav-item"><a class="nav-link" href="/proyecto_final/src/views/Register.php">Register</a></li> -->
                 <?php else: ?>
                     <li class="nav-item ms-auto">
-                        <span class="nav-link fw-bold">Usuario: <?= htmlspecialchars($user['username'] ?? '') ?></span>
+                        <span class="nav-link fw-bold"> <?= htmlspecialchars($user['username'] ?? 'Invitado') ?></span>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-danger" href="/proyecto_final/src/views/Logout.php">Cerrar sesión</a>

@@ -1,7 +1,4 @@
-        </div>
-    </main>
-    <footer>
-        <p>&copy; <?php echo date('Y'); ?> Proyecto Final. Todos los derechos reservados.</p>
-    </footer>
-</body>
-</html>
+<footer class="bg-dark text-white text-center py-3 w-100">
+    <p class="mb-1">© <?= date('Y'); ?> <strong>Proyecto Final</strong></p>
+    <p class="small mb-0">Desarrollado por <strong>Juan P.</strong></p>
+</footer>

@@ -36,7 +36,7 @@ class UsersService
         $stmtRoles->bindParam(':user_id', $user['id'], PDO::PARAM_INT);
         $stmtRoles->execute();
         $roles = $stmtRoles->fetchAll(PDO::FETCH_COLUMN); 
-
+        print_r($roles);
         $userData = [
             'id' => $user['id'],
             'username' => $user['username'],
