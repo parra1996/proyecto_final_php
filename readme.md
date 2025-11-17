@@ -40,8 +40,7 @@ Parrita Store es una aplicación de gestión de productos que permite crear, edi
 
 ## Autor
 
-Juan Pablo Parra Labarca
-GitHub
+Juan Pablo Parra Labarca.
 
 ## Institución
 
