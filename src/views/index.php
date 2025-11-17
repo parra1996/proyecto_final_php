@@ -22,15 +22,13 @@ if ($termino !== '') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Productos</title>
-    
-    <!-- <link rel="stylesheet" href="../../style.css"> -->
+    <!-- <title>Lista de Productos</title> -->
 </head>
 <body>
     <div class="container">
-         <div class="acciones">
+         <!-- <div class="acciones">
             <h2>Listado de Productos</h2>
-        </div>
+        </div> -->
 
         <div class="d-flex justify-content-between mb-3">
             <form method="GET" action="" class="d-flex">
@@ -81,9 +79,12 @@ if ($termino !== '') {
             <td><?= htmlspecialchars($p->getCategoriaNombre()) ?></td>
             <td>
                 <div class="d-flex gap-2 flex-wrap" role="group">
-                    <button onclick="location.href='src/views/Details.php?id=<?= $p->getId() ?>'" class="btn btn-info btn-sm">Detalles</button>
-                    <button onclick="location.href='src/views/Update.php?id=<?= $p->getId() ?>'" class="btn btn-warning btn-sm">Editar</button>
-                    <button onclick="confirmarEliminacion(<?= $p->getId() ?>)" class="btn btn-danger btn-sm">Eliminar</button>
+                    <a href="src/views/Details.php?id=<?= $p->getId() ?>" class="btn btn-info btn-sm">Detalles</a>
+                    <a href="src/views/Update.php?id=<?= $p->getId() ?>" class="btn btn-warning btn-sm">Editar</a>
+                    <form method="POST" action="src/views/delete.php" style="display:inline;">
+                        <input type="hidden" name="id" value="<?= $p->getId() ?>">
+                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                    </form>
                 </div>
             </td>
                 </tr>
@@ -92,13 +93,11 @@ if ($termino !== '') {
         </table>
     </div>
     
-    <script>
-        function confirmarEliminacion(id) {
-            if (confirm("¿Seguro que deseas eliminar este producto?")) {
-                location.href = 'src/views/delete.php?id=' + id;
-            }
+    <?php
+        function confirmarEliminacion($id){
+            header('src/views/delete.php?id=' . $id);
         }
-    </script>
+    ?> 
 </body>
 <?php require_once __DIR__ . '/Footer.php';  ?>
 </html>

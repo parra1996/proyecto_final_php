@@ -61,15 +61,15 @@ class ProductoService
         }
 
         $sql = "
-        SELECT p.*, c.nombre AS categoria_nombre
-        FROM productos p
-        LEFT JOIN categorias c ON p.categoria_id = c.id
-        WHERE p.is_deleted = 0
-        AND (
-            LOWER(p.marca) LIKE LOWER(:filter1)
-            OR LOWER(p.modelo) LIKE LOWER(:filter2)
-        )
-        ORDER BY p.descripcion ASC
+            SELECT p.*, c.nombre AS categoria_nombre
+            FROM productos p
+            LEFT JOIN categorias c ON p.categoria_id = c.id
+            WHERE p.is_deleted = 0
+            AND (
+                LOWER(p.marca) LIKE LOWER(:filter1)
+                OR LOWER(p.modelo) LIKE LOWER(:filter2)
+            )
+            ORDER BY p.descripcion ASC
         ";
 
         $stmt = $this->pdo->prepare($sql);
@@ -101,7 +101,8 @@ class ProductoService
         return $productos;
     }
 
-   public function findById($id)
+   
+    public function findById($id)
     {
         $stmt = $this->pdo->prepare("
             SELECT p.*, c.nombre AS categoria_nombre
@@ -158,7 +159,6 @@ class ProductoService
             'categoria_id' => $data['categoria_id']
         ]);
     }
-
 
     public function update(Producto $producto)
     {   

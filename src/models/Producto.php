@@ -46,7 +46,6 @@ class Producto {
         $this->isDeleted = $isDeleted;
     }
 
-    //getters
     public function getId() { return $this->id; }
     public function getUuid() { return $this->uuid; }
     public function getDescripcion() { return $this->descripcion; }
@@ -61,7 +60,6 @@ class Producto {
     public function getCategoriaNombre() { return $this->categoriaNombre; }
     public function getIsDeleted() { return $this->isDeleted; }
 
-    // Setters
     public function setId($id) { $this->id = $id; }
     public function setUuid($uuid) { $this->uuid = $uuid; }
     public function setDescripcion($descripcion) { $this->descripcion = $descripcion; }

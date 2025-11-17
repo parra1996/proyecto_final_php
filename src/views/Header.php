@@ -15,20 +15,19 @@ $user = $session->getUser();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto Final</title>
+    <title>Parrita Store </title>
+    <link rel="icon" type="image/png" href="/proyecto_final/assets/favicon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 <header class="bg-light py-3 mb-4 shadow-sm">
     <div class="container d-flex justify-content-between align-items-center">
-        <h1 class="h4 mb-0">Mi Proyecto</h1>
+        <h1 class="h4 mb-0">Parrita store<img style="height:80px" src="/proyecto_final/assets/favicon.png"></h1>
         <nav>
             <ul class="nav">
                 <li class="nav-item"><a class="nav-link" href="/proyecto_final/">Inicio</a></li>
                 <?php if (!$session->isLoggedIn()): ?>
                     <li class="nav-item"><a class="nav-link" href="/proyecto_final/src/views/Login.php">Login</a></li>
-                    <!-- <li class="nav-item"><a class="nav-link" href="/proyecto_final/src/views/Register.php">Register</a></li> -->
                 <?php else: ?>
                     <li class="nav-item ms-auto">
                         <span class="nav-link fw-bold"> <?= htmlspecialchars($user['username'] ?? 'Invitado') ?></span>
@@ -41,4 +40,3 @@ $user = $session->getUser();
         </nav>
     </div>
 </header>
-<main class="container">

@@ -63,7 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (empty($errores)) {
             $ext = pathinfo($file_name, PATHINFO_EXTENSION);
-            $safe_name = uniqid('img_') . '.' . strtolower($ext);
+            // $modelo_sanitizado = preg_replace('/[^a-zA-Z0-9_-]/', '_', $modelo);
+            $safe_name = $modelo . '.' . strtolower($ext);
             $target_file = $upload_dir . $safe_name;
 
             if (move_uploaded_file($file_tmp, $target_file)) {
@@ -103,8 +104,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Producto</title>
     <style>
-        .error { color: red; margin: 10px 0; }
+        .error { color: red; margin: 10px 0; font-size: 14px; }
         .success { color: green; }
+        .form-group { margin: 15px 0; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"], input[type="number"], input[type="file"] {
+            width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;
+        }
+        button {
+            background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;
+        }
+        button:hover { background: #0056b3; }
+        .preview-img {
+            max-width: 200px; max-height: 150px; margin-top: 10px; border-radius: 4px; box-shadow: 0 1px 5px rgba(0,0,0,0.2);
+        }
+    </style>
     </style>
 </head>
 <body>
@@ -155,7 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="form-group">
             <label for="categoria_id">Categoría:</label>
             <select name="categoria_id" id="categoria_id" required>
-                <option value="">-- Seleccione una categoría --</option>
+                <option value=""> Seleccione una categoría </option>
                 <?php foreach ($categorias as $cat): ?>
                     <option value="<?= $cat['id'] ?>" <?= (isset($categoria_id) && $categoria_id == $cat['id']) ? 'selected' : '' ?>>
                         <?= htmlspecialchars($cat['nombre']) ?>
@@ -165,7 +179,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
         <button type="submit">Crear Producto</button>
-        <button type="button" onclick="location.href='index.php'">Volver</button>
     </form>
 </div>
 
